@@ -8,16 +8,22 @@ export const Container = styled.div`
    display: grid;
    justify-content: center;
    align-content: center;
+   & > div:last-child {
+      border-bottom: 1px solid #1972d1;
+   }
 `;
 
 export const GridRow = styled.div.attrs((props: IGridRowProps) => props)`
    width: ${(props) => convertToPixels(props.width)};
    height: ${(props) => convertToPixels(props.height)};
+   border-right: 1px solid #1972d1;
+
    display: flex;
 `;
 
 export const GridCell = styled.div.attrs((props: ICellProps) => props)`
    width: ${(props) => convertToPixels(props.width)};
    height: ${(props) => convertToPixels(props.height)};
-   border: 1px solid green;
+   border-top: 1px solid #1972d1;
+   border-left: 1px solid #1972d1;
 `;
