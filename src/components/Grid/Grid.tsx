@@ -3,30 +3,28 @@ import { get2DArray } from "../../utils";
 import { Container, GridCell, GridRow } from "./GridComponents";
 import { IGridProps } from "../../types";
 
-export const Grid = (props: IGridProps) => {
-   const { width, height, rows, columns } = props;
-   console.log({ props });
+export const Grid = React.forwardRef<HTMLDivElement, IGridProps>(
+   (props, ref) => {
+      const { width, height, rows, columns } = props;
+      console.log({ props });
 
-   const rowWidth = columns * width;
+      const gridRows = get2DArray(rows, columns).map((_row, i) => {
+         const row = _row.map((_col, j) => (
+            <GridCell key={`Cell ${i} ${j}`} width={width} height={height} />
+         ));
 
-   const gridRows = get2DArray(rows, columns).map((_row, i) => {
-      const row = _row.map((_col, j) => (
-         <GridCell id={`Cell ${i} ${j}`} width={width} height={height} />
-      ));
-      console.log(row);
+         return (
+            <GridRow
+               key={`Row ${i}`}
+               columns={columns}
+               height={height}
+               width={columns * width}
+            >
+               {row}
+            </GridRow>
+         );
+      });
 
-      return (
-         <GridRow
-            id={`Row ${i}`}
-            columns={columns}
-            height={height}
-            width={rowWidth}
-         >
-            {row}
-         </GridRow>
-      );
-   });
-   console.log(gridRows);
-
-   return <Container>{gridRows}</Container>;
-};
+      return <Container ref={ref}>{gridRows}</Container>;
+   }
+);

@@ -10,3 +10,8 @@ export interface IGridRowProps extends ICellProps {
 export interface IGridProps extends IGridRowProps {
    rows: number;
 }
+
+export interface IDimensions {
+   width: number;
+   height: number;
+}

@@ -4,7 +4,6 @@ import { ICellProps, IGridRowProps } from "../../types";
 
 export const Container = styled.div`
    flex: 1;
-   border: 1px solid red;
 
    display: grid;
    justify-content: center;
