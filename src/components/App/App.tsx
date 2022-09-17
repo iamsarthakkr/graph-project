@@ -1,7 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import { AppContext, AppContextActions, IAppContext } from "./AppContext";
-import { IAppContextActions, reducer, UPDATE_GRID_DIMENSION } from "./reducer";
+import {
+   IAppContextActions,
+   INIT_ALGO,
+   reducer,
+   UPDATE_GRID_DIMENSION,
+} from "./reducer";
 import { EMPTY_GRID_CONTEXT } from "../../constants";
 import { Grid } from "../Grid/Grid";
 import { BFS } from "../Algorithms";
@@ -31,7 +36,6 @@ export const App = () => {
             width: ref.current.offsetWidth,
             height: ref.current.offsetHeight,
          };
-         console.log("dispatching", newDimensions);
          dispatch({
             type: UPDATE_GRID_DIMENSION,
             payload: {
@@ -52,12 +56,17 @@ export const App = () => {
       movement_timer = setTimeout(updateDimensions, RESET_TIMEOUT);
    });
 
+   const handleClick = () => {
+      dispatch({ type: INIT_ALGO });
+   };
+
    return (
       <Container>
          <AppContext.Provider value={appState}>
             <AppContextActions.Provider value={dispatch}>
                <Header>
                   <p>Graph...</p>
+                  <button onClick={handleClick}>Run BFS...</button>
                   <BFS />
                </Header>
                <Grid ref={ref} />

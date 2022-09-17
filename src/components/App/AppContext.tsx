@@ -1,6 +1,6 @@
 import React from "react";
 import { IDimension } from "../../types";
-import { ICell, IGridCell } from "../../types/GridInterfaces";
+import { IGridCell } from "../../types/GridInterfaces";
 import { IAppContextActions } from "./reducer";
 
 export type IGrid = IGridCell[][];
@@ -10,7 +10,9 @@ export interface IAppContext {
    gridDimensions: IDimension;
    source: IGridCell;
    destination: IGridCell;
-   visited: Set<ICell>;
+   visited: Set<number>;
+   BFSQueue: Array<number>;
+   algoRunning: boolean;
 }
 
 export const AppContext = React.createContext<IAppContext>(

@@ -1,6 +1,6 @@
 import { IGrid } from "./components/App/AppContext";
 import { EMPTY_GRID_CELL } from "./constants";
-import { IGridCell, IPoint } from "./types/GridInterfaces";
+import { ICell, IGridCell, IPoint } from "./types/GridInterfaces";
 
 export const get2DArray = <Type,>(
    rows: number,
@@ -34,4 +34,14 @@ export const getEmptyGrid = (rows: number, columns: number): IGrid => {
 
 export const equals = (p1: IGridCell, p2: IGridCell) => {
    return p1.row === p2.row && p1.column === p2.column;
+};
+
+const HASH = 1000000007;
+
+export const hash = (p: ICell) => {
+   return p.row * HASH + p.column;
+};
+
+export const getCellFromHash = (hash: number): ICell => {
+   return { column: hash % HASH, row: Math.floor(hash / HASH) };
 };

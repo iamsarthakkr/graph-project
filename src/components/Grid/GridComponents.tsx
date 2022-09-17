@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { convertToPixels } from "../../utils";
-import { IDimension } from "../../types";
+import { ICellProps, IDimension } from "../../types";
 
 export const Container = styled.div`
    flex: 1;
@@ -21,9 +21,10 @@ export const GridRow = styled.div.attrs((props: IDimension) => props)`
    display: flex;
 `;
 
-export const Cell = styled.div.attrs((props: IDimension) => props)`
+export const Cell = styled.div.attrs((props: ICellProps) => props)`
    width: ${(props) => convertToPixels(props.width)};
    height: ${(props) => convertToPixels(props.height)};
+   background-color: ${(props) => (props.visited ? "blue" : "white")};
    border-top: 1px solid #1972d1;
    border-left: 1px solid #1972d1;
 

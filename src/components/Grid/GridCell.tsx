@@ -3,12 +3,12 @@ import { GiSevenPointedStar } from "react-icons/gi";
 import { IoMdFlag } from "react-icons/io";
 import { HEIGHT, WIDTH } from "../../constants";
 import { IGridCell } from "../../types";
-import { equals } from "../../utils";
+import { equals, hash } from "../../utils";
 import { useAppContext } from "../App/useAppContext";
 import { Cell } from "./GridComponents";
 
 export const GridCell = (props: IGridCell) => {
-   const { source, destination } = useAppContext();
+   const { source, destination, visited } = useAppContext();
 
    const Icon = equals(source, props) ? (
       <GiSevenPointedStar />
@@ -16,8 +16,10 @@ export const GridCell = (props: IGridCell) => {
       <IoMdFlag />
    ) : null;
 
+   const isVisited = visited.has(hash(props));
+
    return (
-      <Cell width={WIDTH} height={HEIGHT}>
+      <Cell width={WIDTH} height={HEIGHT} visited={isVisited}>
          {Icon}
       </Cell>
    );

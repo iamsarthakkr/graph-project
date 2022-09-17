@@ -7,7 +7,6 @@ import { HEIGHT, WIDTH } from "../../constants";
 
 export const Grid = React.forwardRef<HTMLDivElement>((props, ref) => {
    const { rows } = useAppContext();
-   console.log({ state: useAppContext() });
 
    const nRows = rows.length,
       nCols = nRows ? rows[0].length : 0;

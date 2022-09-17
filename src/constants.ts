@@ -1,6 +1,5 @@
 import { IAppContext } from "./components/App/AppContext";
 import { IGridCell } from "./types";
-import { ICell } from "./types/GridInterfaces";
 
 export const HEIGHT = 25;
 export const WIDTH = 25;
@@ -26,5 +25,7 @@ export const EMPTY_GRID_CONTEXT: IAppContext = {
    },
    source: EMPTY_SOURCE_GRID_CELL,
    destination: EMPTY_GRID_CELL,
-   visited: new Set<ICell>(),
+   visited: new Set<number>(),
+   BFSQueue: [],
+   algoRunning: false,
 };
