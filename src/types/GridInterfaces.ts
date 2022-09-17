@@ -12,13 +12,12 @@ export interface IGridRowProps extends IDimension {
    width: number;
    height: number;
 }
-export interface IGridCell {
+
+export interface ICell {
    row: number;
    column: number;
+}
+export interface IGridCell extends ICell {
    distanceFromSource: number;
    prevCell: IGridCell | null;
-}
-
-export interface IGrid {
-   rows: IGridCell[][];
 }

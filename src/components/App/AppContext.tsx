@@ -1,13 +1,16 @@
 import React from "react";
-import { IDimension, IGrid } from "../../types";
-import { IGridCell } from "../../types/GridInterfaces";
+import { IDimension } from "../../types";
+import { ICell, IGridCell } from "../../types/GridInterfaces";
 import { IAppContextActions } from "./reducer";
 
+export type IGrid = IGridCell[][];
+
 export interface IAppContext {
-   grid: IGrid;
+   rows: IGrid;
    gridDimensions: IDimension;
    source: IGridCell;
    destination: IGridCell;
+   visited: Set<ICell>;
 }
 
 export const AppContext = React.createContext<IAppContext>(

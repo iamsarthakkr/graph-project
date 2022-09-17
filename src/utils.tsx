@@ -1,5 +1,6 @@
-import { INFINITY } from "./constants";
-import { IGrid, IGridCell, IPoint } from "./types/GridInterfaces";
+import { IGrid } from "./components/App/AppContext";
+import { EMPTY_GRID_CELL } from "./constants";
+import { IGridCell, IPoint } from "./types/GridInterfaces";
 
 export const get2DArray = <Type,>(
    rows: number,
@@ -26,16 +27,9 @@ export const getRandomPoint = (maxX: number, maxY: number): IPoint => {
 };
 
 export const getEmptyGrid = (rows: number, columns: number): IGrid => {
-   return {
-      rows: get2DArray(rows, columns, { row: 0, column: 0 }).map((row, i) =>
-         row.map((cell, j) => ({
-            row: i,
-            column: j,
-            distanceFromSource: INFINITY,
-            prevCell: null,
-         }))
-      ),
-   };
+   return get2DArray(rows, columns, { row: 0, column: 0 }).map((row, i) =>
+      row.map((cell, j) => ({ ...EMPTY_GRID_CELL, row: i, column: j }))
+   );
 };
 
 export const equals = (p1: IGridCell, p2: IGridCell) => {

@@ -5,14 +5,11 @@ import { IAppContext } from "./AppContext";
 
 // action types
 export const UPDATE_GRID_DIMENSION = "app/update_grid_dimension";
-export const RUN_BREADTH_FIRST_SEARCH = "app/run_breadth_first_search";
 
 export type UpdateGridDimension = IAction<
    typeof UPDATE_GRID_DIMENSION,
    { newDimensions: IDimension }
 >;
-
-export type RunBreadthFirstSearch = IAction<typeof RUN_BREADTH_FIRST_SEARCH>;
 
 // actions
 const updateGridDimension = (
@@ -30,7 +27,7 @@ const updateGridDimension = (
          columns = Math.floor(gridDimensions.width / WIDTH) - 1;
       console.log({ rows, columns });
 
-      const grid = getEmptyGrid(rows, columns);
+      const gridRows = getEmptyGrid(rows, columns);
 
       // update source and destination
       const newSource: IGridCell = {
@@ -46,12 +43,12 @@ const updateGridDimension = (
          prevCell: null,
       };
 
-      grid.rows[newSource.row][newSource.column].distanceFromSource = 0;
+      gridRows[newSource.row][newSource.column].distanceFromSource = 0;
 
       return {
          ...state,
+         rows: gridRows,
          gridDimensions,
-         grid,
          source: newSource,
          destination: newDestination,
       };

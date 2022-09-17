@@ -6,13 +6,13 @@ import { useAppContext } from "../App/useAppContext";
 import { HEIGHT, WIDTH } from "../../constants";
 
 export const Grid = React.forwardRef<HTMLDivElement>((props, ref) => {
-   const { grid: gridState } = useAppContext();
+   const { rows } = useAppContext();
    console.log({ state: useAppContext() });
 
-   const nRows = gridState.rows.length,
-      nCols = nRows ? gridState.rows[0].length : 0;
+   const nRows = rows.length,
+      nCols = nRows ? rows[0].length : 0;
 
-   const grid = gridState.rows.map((row, i) => (
+   const grid = rows.map((row, i) => (
       <GridRow key={`Row: ${i}`} width={nCols * WIDTH} height={HEIGHT}>
          {row.map((cell: IGridCell) => (
             <GridCell key={`Cell: ${cell.row} ${cell.column}`} {...cell} />
