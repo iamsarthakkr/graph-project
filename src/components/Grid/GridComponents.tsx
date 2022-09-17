@@ -26,4 +26,8 @@ export const Cell = styled.div.attrs((props: IDimension) => props)`
    height: ${(props) => convertToPixels(props.height)};
    border-top: 1px solid #1972d1;
    border-left: 1px solid #1972d1;
+
+   display: grid;
+   justify-content: center;
+   align-content: center;
 `;
