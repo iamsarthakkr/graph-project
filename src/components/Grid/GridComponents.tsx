@@ -24,7 +24,7 @@ export const GridRow = styled.div.attrs((props: IDimension) => props)`
 export const Cell = styled.div.attrs((props: ICellProps) => props)`
    width: ${(props) => convertToPixels(props.width)};
    height: ${(props) => convertToPixels(props.height)};
-   background-color: ${(props) => (props.visited ? "blue" : "white")};
+   background-color: ${(props) => (props.visited ? "#00a9f7" : "white")};
    border-top: 1px solid #1972d1;
    border-left: 1px solid #1972d1;
 
