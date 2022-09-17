@@ -1,5 +1,5 @@
 import { HEIGHT, WIDTH } from "../../constants";
-import { IAction, IDimension } from "../../types";
+import { IAction, IDimension, IGridCell } from "../../types";
 import { getEmptyGrid } from "../../utils";
 import { IAppContext } from "./AppContext";
 
@@ -30,13 +30,11 @@ const updateGridDimension = (
       const grid = getEmptyGrid(rows, columns);
 
       // update source and destination
-      const newSource = state.source;
-      newSource.row = Math.min(newSource.row, rows - 1);
-      newSource.column = Math.min(newSource.column, columns - 1);
-
-      const newDestination = state.source;
-      newDestination.row = Math.min(newDestination.row, rows - 1);
-      newDestination.column = Math.min(newDestination.column, columns - 1);
+      const newSource: IGridCell = { row: Math.floor(rows / 2) - 1, column: 2 };
+      const newDestination: IGridCell = {
+         row: Math.floor(rows / 2) - 1,
+         column: columns - 3,
+      };
 
       return {
          ...state,
