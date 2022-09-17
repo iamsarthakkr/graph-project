@@ -1,3 +1,4 @@
+import { INFINITY } from "./constants";
 import { IGrid, IGridCell, IPoint } from "./types/GridInterfaces";
 
 export const get2DArray = <Type,>(
@@ -27,7 +28,12 @@ export const getRandomPoint = (maxX: number, maxY: number): IPoint => {
 export const getEmptyGrid = (rows: number, columns: number): IGrid => {
    return {
       rows: get2DArray(rows, columns, { row: 0, column: 0 }).map((row, i) =>
-         row.map((cell, j) => ({ row: i, column: j }))
+         row.map((cell, j) => ({
+            row: i,
+            column: j,
+            distanceFromSource: INFINITY,
+            prevCell: null,
+         }))
       ),
    };
 };

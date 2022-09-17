@@ -1,15 +1,18 @@
-import { HEIGHT, WIDTH } from "../../constants";
+import { HEIGHT, INFINITY, WIDTH } from "../../constants";
 import { IAction, IDimension, IGridCell } from "../../types";
 import { getEmptyGrid } from "../../utils";
 import { IAppContext } from "./AppContext";
 
 // action types
 export const UPDATE_GRID_DIMENSION = "app/update_grid_dimension";
+export const RUN_BREADTH_FIRST_SEARCH = "app/run_breadth_first_search";
 
 export type UpdateGridDimension = IAction<
    typeof UPDATE_GRID_DIMENSION,
    { newDimensions: IDimension }
 >;
+
+export type RunBreadthFirstSearch = IAction<typeof RUN_BREADTH_FIRST_SEARCH>;
 
 // actions
 const updateGridDimension = (
@@ -30,11 +33,20 @@ const updateGridDimension = (
       const grid = getEmptyGrid(rows, columns);
 
       // update source and destination
-      const newSource: IGridCell = { row: Math.floor(rows / 2) - 1, column: 2 };
+      const newSource: IGridCell = {
+         row: Math.floor(rows / 2) - 1,
+         column: 2,
+         distanceFromSource: 0,
+         prevCell: null,
+      };
       const newDestination: IGridCell = {
          row: Math.floor(rows / 2) - 1,
          column: columns - 3,
+         distanceFromSource: INFINITY,
+         prevCell: null,
       };
+
+      grid.rows[newSource.row][newSource.column].distanceFromSource = 0;
 
       return {
          ...state,
