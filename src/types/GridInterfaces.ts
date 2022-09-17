@@ -1,4 +1,3 @@
-import { CellType } from "../enums";
 export interface IPoint {
    x: number;
    y: number;
