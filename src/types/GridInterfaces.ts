@@ -8,10 +8,6 @@ export interface IDimension {
    height: number;
 }
 
-export interface ICellProps extends IDimension {
-   visited: boolean;
-}
-
 export interface IGridRowProps extends IDimension {
    width: number;
    height: number;

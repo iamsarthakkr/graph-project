@@ -10,6 +10,9 @@ export interface IAppContext {
    gridDimensions: IDimension;
    source: IGridCell;
    destination: IGridCell;
+   pathFound: boolean;
+   shortestPath: Array<number>;
+   visitedOnShortestPath: Set<number>;
    visited: Set<number>;
    BFSQueue: Array<number>;
    algoRunning: boolean;

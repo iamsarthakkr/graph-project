@@ -8,7 +8,8 @@ import { useAppContext } from "../App/useAppContext";
 import { Cell } from "./GridComponents";
 
 export const GridCell = (props: IGridCell) => {
-   const { source, destination, visited } = useAppContext();
+   const { source, destination, visited, visitedOnShortestPath } =
+      useAppContext();
 
    const Icon = equals(source, props) ? (
       <GiSevenPointedStar />
@@ -17,9 +18,10 @@ export const GridCell = (props: IGridCell) => {
    ) : null;
 
    const isVisited = visited.has(hash(props));
+   const onPath = visitedOnShortestPath.has(hash(props));
 
    return (
-      <Cell width={WIDTH} height={HEIGHT} visited={isVisited}>
+      <Cell width={WIDTH} height={HEIGHT} visited={isVisited} onPath={onPath}>
          {Icon}
       </Cell>
    );

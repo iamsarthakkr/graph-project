@@ -8,7 +8,6 @@ export const runBFS = (
 ): IAppContext => {
    const dr = [1, -1, 0, 0],
       dc = [0, 0, 1, -1];
-   console.log({ state });
 
    const { BFSQueue, rows, visited, destination, algoRunning } = state;
 
@@ -53,13 +52,12 @@ export const runBFS = (
       newBFSQueue.shift();
    }
 
-   console.log({ newBFSQueue });
-
    return {
       ...state,
       BFSQueue: newBFSQueue,
       rows: newRows,
       visited: newVisited,
       algoRunning: algoRunning && !reachedDestination && newBFSQueue.length > 0,
+      pathFound: reachedDestination,
    };
 };

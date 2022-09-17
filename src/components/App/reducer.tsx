@@ -7,6 +7,8 @@ import { IAppContext } from "./AppContext";
 // action types
 export const UPDATE_GRID_DIMENSION = "app/update_grid_dimension";
 export const INIT_ALGO = "app/init_algo";
+export const GET_SHORTEST_PATH = "app/get_shortest_path";
+export const ADD_TO_SHORTEST_PATH = "app/add_to_shortest_path";
 export const RUN_BFS = "app/run_bfs";
 
 export type UpdateGridDimension = IAction<
@@ -14,6 +16,8 @@ export type UpdateGridDimension = IAction<
    { newDimensions: IDimension }
 >;
 export type InitAlgo = IAction<typeof INIT_ALGO>;
+export type GetShortestPath = IAction<typeof GET_SHORTEST_PATH>;
+export type AddToShortestPath = IAction<typeof ADD_TO_SHORTEST_PATH>;
 export type RunBFS = IAction<typeof RUN_BFS>;
 
 // actions
@@ -23,7 +27,15 @@ const initAlgo = (state: IAppContext, action: InitAlgo) => {
    const visited = new Set<number>();
    visited.add(hash({ row: source.row, column: source.column }));
    const BFSQueue = [hash({ ...source })];
-   return { ...state, algoRunning: true, visited, BFSQueue };
+   const visitedOnShortestPath = new Set<number>();
+   return {
+      ...state,
+      algoRunning: true,
+      visited,
+      BFSQueue,
+      pathFound: false,
+      visitedOnShortestPath,
+   };
 };
 
 const updateGridDimension = (
@@ -61,7 +73,51 @@ const updateGridDimension = (
    return state;
 };
 
-export type IAppContextActions = UpdateGridDimension | InitAlgo | RunBFS;
+const getShortestPath = (state: IAppContext, action: GetShortestPath) => {
+   console.log("updating shortest path......");
+
+   const shortestPath: Array<number> = [];
+
+   let node: IGridCell | null = state.destination;
+   while (node !== null) {
+      shortestPath.push(hash(node));
+      node = node.prevCell;
+   }
+   shortestPath.reverse();
+   const newState: IAppContext = {
+      ...state,
+      shortestPath,
+      algoRunning: false,
+   };
+   return newState;
+};
+
+const addToShortestPath = (state: IAppContext, action: AddToShortestPath) => {
+   const { shortestPath, visitedOnShortestPath, pathFound } = state;
+
+   const newVisitedOnShortestPath = new Set([...visitedOnShortestPath]);
+   const newShortestPath = [...shortestPath];
+
+   if (newShortestPath.length === 0) return state;
+   const top = newShortestPath[0];
+   newShortestPath.shift();
+
+   newVisitedOnShortestPath.add(top);
+
+   return {
+      ...state,
+      shortestPath: newShortestPath,
+      visitedOnShortestPath: newVisitedOnShortestPath,
+      pathFound: pathFound && newShortestPath.length > 0,
+   };
+};
+
+export type IAppContextActions =
+   | UpdateGridDimension
+   | InitAlgo
+   | GetShortestPath
+   | AddToShortestPath
+   | RunBFS;
 
 export const reducer: React.Reducer<IAppContext, IAppContextActions> = (
    state,
@@ -72,6 +128,10 @@ export const reducer: React.Reducer<IAppContext, IAppContextActions> = (
          return updateGridDimension(state, action);
       case INIT_ALGO:
          return initAlgo(state, action);
+      case GET_SHORTEST_PATH:
+         return getShortestPath(state, action);
+      case ADD_TO_SHORTEST_PATH:
+         return addToShortestPath(state, action);
       case RUN_BFS:
          return runBFS(state, action);
       default:

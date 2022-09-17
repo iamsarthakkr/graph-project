@@ -8,8 +8,8 @@ import {
    UPDATE_GRID_DIMENSION,
 } from "./reducer";
 import { EMPTY_GRID_CONTEXT } from "../../constants";
-import { Grid } from "../Grid/Grid";
-import { BFS } from "../Algorithms";
+import { Grid } from "../Grid";
+import { BFS, GetShortestPath, ShortestPath } from "../Algorithms";
 
 const Container = styled.div`
    text-align: center;
@@ -29,6 +29,8 @@ export const App = () => {
    const [appState, dispatch] = React.useReducer<
       React.Reducer<IAppContext, IAppContextActions>
    >(reducer, EMPTY_GRID_CONTEXT);
+
+   console.log({ appState });
 
    const updateDimensions = () => {
       if (ref.current) {
@@ -57,6 +59,8 @@ export const App = () => {
    });
 
    const handleClick = () => {
+      console.log("init algo");
+
       dispatch({ type: INIT_ALGO });
    };
 
@@ -68,6 +72,8 @@ export const App = () => {
                   <p>Graph...</p>
                   <button onClick={handleClick}>Run BFS...</button>
                   <BFS />
+                  <GetShortestPath />
+                  <ShortestPath />
                </Header>
                <Grid ref={ref} />
             </AppContextActions.Provider>

@@ -8,16 +8,14 @@ export const BFS = () => {
    const dispatch = useAppContextActions();
 
    React.useEffect(() => {
+      console.log({ algoRunning });
       if (!algoRunning) return;
 
       const timer = setInterval(() => {
-         console.log("inside interval");
-
          dispatch({ type: RUN_BFS });
-      }, 0.00002);
+      }, 10);
       return () => {
          console.log("clearing up........");
-
          clearInterval(timer);
       };
    }, [dispatch, algoRunning]);
