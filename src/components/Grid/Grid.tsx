@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { GridCell } from "./GridCell";
 import { Container, GridRow } from "./GridComponents";
 import { IGridCell } from "../../types";
