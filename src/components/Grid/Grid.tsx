@@ -7,6 +7,7 @@ import { HEIGHT, WIDTH } from "../../constants";
 
 export const Grid = React.forwardRef<HTMLDivElement>((props, ref) => {
    const { grid: gridState } = useAppContext();
+   console.log({ state: useAppContext() });
 
    const nRows = gridState.rows.length,
       nCols = nRows ? gridState.rows[0].length : 0;
@@ -18,8 +19,6 @@ export const Grid = React.forwardRef<HTMLDivElement>((props, ref) => {
          ))}
       </GridRow>
    ));
-
-   console.log({ grid });
 
    return <Container ref={ref}>{grid}</Container>;
 });

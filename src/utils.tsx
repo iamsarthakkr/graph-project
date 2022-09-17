@@ -1,4 +1,4 @@
-import { IGrid, IPoint } from "../types/GridInterfaces";
+import { IGrid, IGridCell, IPoint } from "./types/GridInterfaces";
 
 export const get2DArray = <Type,>(
    rows: number,
@@ -30,4 +30,8 @@ export const getEmptyGrid = (rows: number, columns: number): IGrid => {
          row.map((cell, j) => ({ row: i, column: j }))
       ),
    };
+};
+
+export const equals = (p1: IGridCell, p2: IGridCell) => {
+   return p1.row === p2.row && p1.column === p2.column;
 };
