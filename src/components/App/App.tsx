@@ -4,6 +4,7 @@ import { AppContext, AppContextActions, IAppContext } from "./AppContext";
 import { IAppContextActions, reducer, UPDATE_GRID_DIMENSION } from "./reducer";
 import { EMPTY_GRID_CONTEXT } from "../../constants";
 import { Grid } from "../Grid/Grid";
+import { BFS } from "../Algorithms";
 
 const Container = styled.div`
    text-align: center;
@@ -55,7 +56,10 @@ export const App = () => {
       <Container>
          <AppContext.Provider value={appState}>
             <AppContextActions.Provider value={dispatch}>
-               <Header>Graph ...</Header>
+               <Header>
+                  <p>Graph...</p>
+                  <BFS />
+               </Header>
                <Grid ref={ref} />
             </AppContextActions.Provider>
          </AppContext.Provider>
