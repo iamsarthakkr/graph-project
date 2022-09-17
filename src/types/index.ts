@@ -1,1 +1,2 @@
-export { ICellProps, IGridProps, IGridRowProps } from "./GridInterfaces";
+export { IGrid, IGridCell, IDimension, IGridRowProps } from "./GridInterfaces";
+export { IAction } from "./common";

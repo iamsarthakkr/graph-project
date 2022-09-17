@@ -1,17 +1,24 @@
-export interface ICellProps {
+import { CellType } from "../enums";
+export interface IPoint {
+   x: number;
+   y: number;
+}
+
+export interface IDimension {
    width: number;
    height: number;
 }
 
-export interface IGridRowProps extends ICellProps {
-   columns: number;
-}
-
-export interface IGridProps extends IGridRowProps {
-   rows: number;
-}
-
-export interface IDimensions {
+export interface IGridRowProps extends IDimension {
    width: number;
    height: number;
+}
+
+export interface IGridCell {
+   row: number;
+   column: number;
+}
+
+export interface IGrid {
+   rows: IGridCell[][];
 }
