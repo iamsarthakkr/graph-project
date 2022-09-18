@@ -23,6 +23,7 @@ export const EMPTY_GRID_CONTEXT: IAppContext = {
       width: 0,
       height: 0,
    },
+   currentCellOver: null,
    source: EMPTY_SOURCE_GRID_CELL,
    destination: EMPTY_GRID_CELL,
    pathFound: false,

@@ -1,6 +1,6 @@
 import React from "react";
 import { IDimension } from "../../types";
-import { IGridCell } from "../../types/GridInterfaces";
+import { ICell, IGridCell } from "../../types/GridInterfaces";
 import { IAppContextActions } from "./reducer";
 
 export type IGrid = IGridCell[][];
@@ -8,6 +8,7 @@ export type IGrid = IGridCell[][];
 export interface IAppContext {
    rows: IGrid;
    gridDimensions: IDimension;
+   currentCellOver: ICell | null;
    source: IGridCell;
    destination: IGridCell;
    pathFound: boolean;
