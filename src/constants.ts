@@ -10,11 +10,18 @@ export const EMPTY_GRID_CELL: IGridCell = {
    column: 0,
    distanceFromSource: INFINITY,
    prevCell: null,
+   cellType: "EMPTY",
 };
 
 export const EMPTY_SOURCE_GRID_CELL: IGridCell = {
    ...EMPTY_GRID_CELL,
    distanceFromSource: 0,
+   cellType: "SOURCE",
+};
+
+export const EMPTY_DESTINATION_GRID_CELL: IGridCell = {
+   ...EMPTY_GRID_CELL,
+   cellType: "DESTINATION",
 };
 
 export const EMPTY_GRID_CONTEXT: IAppContext = {
@@ -25,7 +32,7 @@ export const EMPTY_GRID_CONTEXT: IAppContext = {
    },
    currentCellOver: null,
    source: EMPTY_SOURCE_GRID_CELL,
-   destination: EMPTY_GRID_CELL,
+   destination: EMPTY_DESTINATION_GRID_CELL,
    pathFound: false,
    shortestPath: [],
    visitedOnShortestPath: new Set<number>(),

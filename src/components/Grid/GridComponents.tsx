@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { convertToPixels } from "../../utils";
+import { convertToPixels, getBackgroundColor } from "../../utils";
 import { IDimension } from "../../types";
+import { IGridCellType } from "../../types/GridInterfaces";
 
 export const Container = styled.div`
    flex: 1;
@@ -15,7 +16,8 @@ export const Container = styled.div`
 
 export interface ICellProps extends IDimension {
    visited: boolean;
-   onPath: boolean;
+   cellOnPath: boolean;
+   cellType: IGridCellType;
 }
 
 export const GridRow = styled.div.attrs((props: IDimension) => props)`
@@ -30,7 +32,11 @@ export const Cell = styled.div.attrs((props: ICellProps) => props)`
    width: ${(props) => convertToPixels(props.width)};
    height: ${(props) => convertToPixels(props.height)};
    background-color: ${(props) =>
-      props.onPath ? "yellow" : props.visited ? "#00a9f7" : "white"};
+      props.cellOnPath
+         ? "#53ea38"
+         : props.visited
+         ? "#00a9f7"
+         : getBackgroundColor(props.cellType)};
    border-top: 1px solid #1972d1;
    border-left: 1px solid #1972d1;
 

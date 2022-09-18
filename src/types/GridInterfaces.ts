@@ -17,7 +17,16 @@ export interface ICell {
    row: number;
    column: number;
 }
+
+export type IGridCellType =
+   | "EMPTY"
+   | "SOURCE"
+   | "DESTINATION"
+   | "WALL"
+   | "WEIGHTED";
+
 export interface IGridCell extends ICell {
    distanceFromSource: number;
    prevCell: IGridCell | null;
+   cellType: IGridCellType;
 }

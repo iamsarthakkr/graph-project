@@ -1,6 +1,11 @@
 import { IGrid } from "./components/App/AppContext";
 import { EMPTY_GRID_CELL } from "./constants";
-import { ICell, IGridCell, IPoint } from "./types/GridInterfaces";
+import {
+   ICell,
+   IGridCell,
+   IGridCellType,
+   IPoint,
+} from "./types/GridInterfaces";
 
 export const get2DArray = <Type,>(
    rows: number,
@@ -44,4 +49,17 @@ export const hash = (p: ICell) => {
 
 export const getCellFromHash = (hash: number): ICell => {
    return { column: hash % HASH, row: Math.floor(hash / HASH) };
+};
+
+export const getBackgroundColor = (cellType: IGridCellType) => {
+   switch (cellType) {
+      case "SOURCE":
+         return "#8bcfef";
+      case "DESTINATION":
+         return "#8bcfef";
+      case "WALL":
+         return "#210a00";
+      default:
+         return "white";
+   }
 };

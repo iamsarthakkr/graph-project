@@ -49,6 +49,9 @@ export const updateGridDimension = (
       const newSource: IGridCell = gridRows[source.row][source.column];
       const newDestination: IGridCell = gridRows[dest.row][dest.column];
 
+      newSource.cellType = "SOURCE";
+      newDestination.cellType = "DESTINATION";
+
       gridRows[newSource.row][newSource.column].distanceFromSource = 0;
 
       return {
