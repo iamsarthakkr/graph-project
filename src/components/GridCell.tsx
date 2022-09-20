@@ -1,12 +1,12 @@
 import React from "react";
 import { GiSevenPointedStar } from "react-icons/gi";
 import { IoMdFlag } from "react-icons/io";
-import { HEIGHT, WIDTH } from "../../constants";
-import { IGridCell } from "../../types";
-import { hash } from "../../utils";
-import { UPDATE_CELL_OVER } from "../App/reducer";
-import { useAppContext } from "../App/useAppContext";
-import { useAppContextActions } from "../App/useAppContextActions";
+import { HEIGHT, WIDTH } from "../constants";
+import { UPDATE_CELL_OVER } from "../context/appActions";
+import { useAppContext } from "../context/useAppContext";
+import { useAppContextActions } from "../context/useAppContextActions";
+import { IGridCell } from "../types";
+import { hash } from "../utils";
 import { Cell } from "./GridComponents";
 
 export const GridCell = (props: IGridCell) => {
@@ -15,6 +15,14 @@ export const GridCell = (props: IGridCell) => {
 
    const handleMouseOver = () => {
       dispatch({ type: UPDATE_CELL_OVER, payload: { point: props } });
+   };
+
+   const handleMouseDown = () => {
+      console.log("mouse-down", { props });
+   };
+
+   const handleMouseUp = () => {
+      console.log("mouse-up", { props });
    };
 
    let Icon = null;
@@ -35,6 +43,8 @@ export const GridCell = (props: IGridCell) => {
    return (
       <Cell
          onMouseOver={handleMouseOver}
+         onMouseDown={handleMouseDown}
+         onMouseUp={handleMouseUp}
          width={WIDTH}
          height={HEIGHT}
          visited={isVisited}

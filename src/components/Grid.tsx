@@ -1,9 +1,9 @@
 import React from "react";
 import { GridCell } from "./GridCell";
 import { Container, GridRow } from "./GridComponents";
-import { IGridCell } from "../../types";
-import { useAppContext } from "../App/useAppContext";
-import { HEIGHT, WIDTH } from "../../constants";
+import { IGridCell } from "../types";
+import { useAppContext } from "../context/useAppContext";
+import { HEIGHT, WIDTH } from "../constants";
 
 export const Grid = React.forwardRef<HTMLDivElement>((props, ref) => {
    const { rows } = useAppContext();

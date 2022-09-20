@@ -1,15 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import { AppContext, AppContextActions, IAppContext } from "./AppContext";
+import { EMPTY_GRID_CONTEXT } from "../constants";
+import { AppContext, AppContextActions, IAppContext } from "../context";
 import {
-   IAppContextActions,
-   INIT_ALGO,
-   reducer,
+   RUN_ALGO,
+   SET_VISUALIZING_ALGO,
    UPDATE_GRID_DIMENSION,
-} from "./reducer";
-import { EMPTY_GRID_CONTEXT } from "../../constants";
-import { Grid } from "../Grid";
-import { BFS, GetShortestPath, ShortestPath } from "../Algorithms";
+} from "../context/appActions";
+import { IAppContextActions, reducer } from "../context/reducer";
+import { AlgorithmVisualizer } from "./AlgorithmVisualizer";
+import { Grid } from "./Grid";
+import { ShortestPathVisualizer } from "./ShortestPathVisualizer";
 
 const Container = styled.div`
    text-align: center;
@@ -58,10 +59,19 @@ export const App = () => {
       movement_timer = setTimeout(updateDimensions, RESET_TIMEOUT);
    });
 
-   const handleClick = () => {
+   const runAlgo = () => {
       console.log("init algo");
 
-      dispatch({ type: INIT_ALGO });
+      dispatch({ type: RUN_ALGO, payload: { algorithm: "BFS" } });
+   };
+
+   const visualizeAlgo = () => {
+      console.log("run algo");
+
+      dispatch({
+         type: SET_VISUALIZING_ALGO,
+         payload: { visualizingAlgo: true },
+      });
    };
 
    return (
@@ -70,10 +80,11 @@ export const App = () => {
             <AppContextActions.Provider value={dispatch}>
                <Header>
                   <p>Graph...</p>
-                  <button onClick={handleClick}>Run BFS...</button>
-                  <BFS />
-                  <GetShortestPath />
-                  <ShortestPath />
+                  <button onClick={runAlgo}>Run Algo...</button>
+                  <br />
+                  <button onClick={visualizeAlgo}>Visualize BFS...</button>
+                  <AlgorithmVisualizer />
+                  <ShortestPathVisualizer />
                </Header>
                <Grid ref={ref} />
             </AppContextActions.Provider>

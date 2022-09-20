@@ -18,6 +18,10 @@ export interface ICell {
    column: number;
 }
 
+export type IGrid = IGridCell[][];
+
+export type ICellChangeEvent = "SOURCE" | "NONE" | "DESTINATION" | "NORMAL";
+
 export type IGridCellType =
    | "EMPTY"
    | "SOURCE"

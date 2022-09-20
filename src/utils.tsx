@@ -1,11 +1,5 @@
-import { IGrid } from "./components/App/AppContext";
 import { EMPTY_GRID_CELL } from "./constants";
-import {
-   ICell,
-   IGridCell,
-   IGridCellType,
-   IPoint,
-} from "./types/GridInterfaces";
+import { ICell, IGrid, IGridCell, IGridCellType, IPoint } from "./types";
 
 export const get2DArray = <Type,>(
    rows: number,

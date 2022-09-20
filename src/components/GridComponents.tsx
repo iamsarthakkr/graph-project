@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { convertToPixels, getBackgroundColor } from "../../utils";
-import { IDimension } from "../../types";
-import { IGridCellType } from "../../types/GridInterfaces";
+import { IDimension, IGridCellType } from "../types";
+import { convertToPixels, getBackgroundColor } from "../utils";
 
 export const Container = styled.div`
    flex: 1;

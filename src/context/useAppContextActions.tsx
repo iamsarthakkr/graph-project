@@ -1,4 +1,4 @@
 import React from "react";
-import { AppContextActions } from "./AppContext";
+import { AppContextActions } from ".";
 
 export const useAppContextActions = () => React.useContext(AppContextActions);

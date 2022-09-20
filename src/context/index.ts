@@ -1,22 +1,33 @@
 import React from "react";
-import { IDimension } from "../../types";
-import { ICell, IGridCell } from "../../types/GridInterfaces";
+import {
+   IAlgorithmConfig,
+   ICell,
+   ICellChangeEvent,
+   IDimension,
+   IGrid,
+   IGridCell,
+   IVisitingOrder,
+} from "../types";
 import { IAppContextActions } from "./reducer";
-
-export type IGrid = IGridCell[][];
 
 export interface IAppContext {
    rows: IGrid;
    gridDimensions: IDimension;
    currentCellOver: ICell | null;
+   cellChangeEvent: ICellChangeEvent;
    source: IGridCell;
    destination: IGridCell;
-   pathFound: boolean;
-   shortestPath: Array<number>;
-   visitedOnShortestPath: Set<number>;
+
+   algorithmConfig: IAlgorithmConfig;
+
+   visualizingAlgo: boolean;
+   visualizingShortestPath: boolean;
+
+   visitingOrder: IVisitingOrder;
    visited: Set<number>;
-   BFSQueue: Array<number>;
-   algoRunning: boolean;
+
+   visitedOnShortestPath: Set<number>;
+   shortestPath: Array<number>;
 }
 
 export const AppContext = React.createContext<IAppContext>(
