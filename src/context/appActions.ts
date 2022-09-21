@@ -137,10 +137,15 @@ export const setVisualizeAlgo = (
    action: SetVisualizeAlgo
 ): IAppContext => {
    if (action.payload) {
+      const { algorithmConfig } = state;
       return {
          ...state,
          visualizingAlgo: action.payload.visualizingAlgo,
          visualizeStepDuration: action.payload.visualizeStepDuration,
+         visitingOrder: [...algorithmConfig.order],
+         shortestPath: [...algorithmConfig.shortestPath],
+         visited: new Set<number>(),
+         visitedOnShortestPath: new Set<number>(),
       };
    }
    return state;
