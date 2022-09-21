@@ -165,26 +165,19 @@ export const visualizeAlgoStep = (
             visualizingShortestPath: true,
          };
       }
-      const newVisitingOrder = visitingOrder.map((order) => {
-         return {
-            visitingTime: order.visitingTime,
-            visitedNodes: [...order.visitedNodes],
-         };
-      });
+      const newVisitingOrder = visitingOrder.map((v) => v);
       const newVisited = new Set<number>([...visited]);
 
       const toVisit = action.payload.animate ? 1 : newVisitingOrder.length;
       let reachedDestination = false;
       for (let t = 0; t < toVisit; t++) {
          if (reachedDestination) break;
-         const currOrder = newVisitingOrder[0];
+         const hashVal = newVisitingOrder[0];
          newVisitingOrder.shift();
-         for (const hashVal of currOrder.visitedNodes) {
-            newVisited.add(hashVal);
-            if (hash(state.destination) === hashVal) {
-               reachedDestination = true;
-               break;
-            }
+         newVisited.add(hashVal);
+         if (hash(state.destination) === hashVal) {
+            reachedDestination = true;
+            break;
          }
       }
 

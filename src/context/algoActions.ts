@@ -14,13 +14,7 @@ export const runBFS = (state: IAppContext): IAppContext => {
    const newDestination = newRows[destination.row][destination.column];
 
    // generating visiting order
-   const visitingOrder: IVisitingOrder = [];
-   for (let i = 0; i < BFSRes.order.length; i++) {
-      visitingOrder.push({ visitingTime: i, visitedNodes: [] });
-      for (const hashVal of BFSRes.order[i]) {
-         visitingOrder[i].visitedNodes.push(hashVal);
-      }
-   }
+   const visitingOrder: IVisitingOrder = [...BFSRes.order];
 
    return {
       ...state,

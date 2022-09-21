@@ -73,7 +73,7 @@ export const App = () => {
          type: SET_VISUALIZING_ALGO,
          payload: {
             visualizingAlgo: true,
-            visualizeStepDuration: visualizeStepDurations.SLOW,
+            visualizeStepDuration: visualizeStepDurations.FAST,
          },
       });
    };

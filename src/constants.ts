@@ -1,15 +1,15 @@
 import { IAppContext } from "./context";
 import { IGridCell } from "./types";
 
-export const HEIGHT = 30;
-export const WIDTH = 30;
+export const HEIGHT = 35;
+export const WIDTH = 35;
 export const INFINITY = 1000000000;
 
 export const visualizeStepDurations = {
    INSTANT: 0,
-   FAST: 20,
-   MEDIUM: 70,
-   SLOW: 150,
+   FAST: 1,
+   MEDIUM: 50,
+   SLOW: 200,
 };
 
 export const dr = [1, -1, 0, 0],
@@ -52,7 +52,7 @@ export const EMPTY_GRID_CONTEXT: IAppContext = {
    visualizingShortestPath: false,
    algorithmConfig: {
       order: [],
-      shortestPath: null,
+      shortestPath: [],
    },
    visitingOrder: [],
 };

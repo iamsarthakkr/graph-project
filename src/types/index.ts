@@ -11,9 +11,4 @@ export {
 
 export { IAction } from "./common";
 
-export {
-   IAlgorithmConfig,
-   IAlgorithm,
-   IVisitedNodes,
-   IVisitingOrder,
-} from "./algorithms";
+export { IAlgorithmConfig, IAlgorithm, IVisitingOrder } from "./algorithms";

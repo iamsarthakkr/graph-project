@@ -1,12 +1,7 @@
 export interface IAlgorithmConfig {
-   order: Array<Array<number>>;
-   shortestPath: Array<number> | null;
+   order: Array<number>;
+   shortestPath: Array<number>;
 }
 
 export type IAlgorithm = "BFS" | "NONE";
-export type IVisitedNodes = {
-   visitingTime: number;
-   visitedNodes: Array<number>;
-};
-
-export type IVisitingOrder = Array<IVisitedNodes>;
+export type IVisitingOrder = Array<number>;

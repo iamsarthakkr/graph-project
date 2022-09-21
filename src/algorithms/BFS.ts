@@ -13,39 +13,35 @@ export const BFS = (
       maxCol = maxRow > -1 ? grid[0].length - 1 : -1;
 
    const visited = new Set<number>();
-   const BFS_Order: number[][] = [];
+   const BFS_Order: number[] = [];
 
    visited.add(hash(source));
-   BFS_Order.push([hash(source)]);
+   BFS_Order.push(hash(source));
 
    for (let i = 0; i < BFS_Order.length; i++) {
-      const next_visited: number[] = [];
+      const hashVal = BFS_Order[i];
+      const cell = getCellFromHash(hashVal),
+         gridCell = grid[cell.row][cell.column];
 
-      for (const hashVal of BFS_Order[i]) {
-         const cell = getCellFromHash(hashVal),
-            gridCell = grid[cell.row][cell.column];
+      for (let d = 0; d < 4; d++) {
+         const nr = cell.row + dr[d],
+            nc = cell.column + dc[d];
+         if (nr < 0 || nr > maxRow || nc < 0 || nc > maxCol) continue;
+         const hashVal = hash({ row: nr, column: nc });
+         if (visited.has(hashVal)) continue;
 
-         for (let d = 0; d < 4; d++) {
-            const nr = cell.row + dr[d],
-               nc = cell.column + dc[d];
-            if (nr < 0 || nr > maxRow || nc < 0 || nc > maxCol) continue;
-            const hashVal = hash({ row: nr, column: nc });
-            if (visited.has(hashVal)) continue;
+         const nextGridCell = grid[nr][nc];
+         nextGridCell.distanceFromSource = gridCell.distanceFromSource + 1;
+         nextGridCell.prevCell = gridCell;
 
-            const nextGridCell = grid[nr][nc];
-            nextGridCell.distanceFromSource = gridCell.distanceFromSource + 1;
-            nextGridCell.prevCell = gridCell;
-
-            visited.add(hashVal);
-            next_visited.push(hashVal);
-         }
+         visited.add(hashVal);
+         BFS_Order.push(hashVal);
       }
-      if (next_visited.length > 0) BFS_Order.push(next_visited);
    }
 
    console.log({ grid, source, destination });
 
-   let shortestPath: Array<number> | null = null;
+   let shortestPath: Array<number> = [];
    const { row, column } = destination;
    if (grid[row][column].distanceFromSource !== INFINITY) {
       shortestPath = [];
