@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { EMPTY_GRID_CONTEXT } from "../constants";
+import { EMPTY_GRID_CONTEXT, visualizeStepDurations } from "../constants";
 import { AppContext, AppContextActions, IAppContext } from "../context";
 import {
    RUN_ALGO,
@@ -71,7 +71,10 @@ export const App = () => {
 
       dispatch({
          type: SET_VISUALIZING_ALGO,
-         payload: { visualizingAlgo: true },
+         payload: {
+            visualizingAlgo: true,
+            visualizeStepDuration: visualizeStepDurations.SLOW,
+         },
       });
    };
 

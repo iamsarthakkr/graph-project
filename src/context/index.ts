@@ -20,6 +20,8 @@ export interface IAppContext {
 
    algorithmConfig: IAlgorithmConfig;
 
+   visualizeStepDuration: number;
+
    visualizingAlgo: boolean;
    visualizingShortestPath: boolean;
 

@@ -130,25 +130,32 @@ export const runAlgo = (state: IAppContext, action: RunAlgo): IAppContext => {
 export const SET_VISUALIZING_ALGO = "app/set_visualize_algo";
 export type SetVisualizeAlgo = IAction<
    typeof SET_VISUALIZING_ALGO,
-   { visualizingAlgo: boolean }
+   { visualizingAlgo: boolean; visualizeStepDuration: number }
 >;
 export const setVisualizeAlgo = (
    state: IAppContext,
    action: SetVisualizeAlgo
 ): IAppContext => {
    if (action.payload) {
-      return { ...state, visualizingAlgo: action.payload.visualizingAlgo };
+      return {
+         ...state,
+         visualizingAlgo: action.payload.visualizingAlgo,
+         visualizeStepDuration: action.payload.visualizeStepDuration,
+      };
    }
    return state;
 };
 
 export const VISUALIZE_ALGO_STEP = "app/visualize_algo_step";
-export type VisualizeAlgoStep = IAction<typeof VISUALIZE_ALGO_STEP>;
+export type VisualizeAlgoStep = IAction<
+   typeof VISUALIZE_ALGO_STEP,
+   { animate: boolean }
+>;
 export const visualizeAlgoStep = (
    state: IAppContext,
    action: VisualizeAlgoStep
 ): IAppContext => {
-   if (state.visualizingAlgo) {
+   if (action.payload && state.visualizingAlgo) {
       const { visitingOrder, visited } = state;
       if (visitingOrder.length === 0) {
          // visualize
@@ -166,16 +173,20 @@ export const visualizeAlgoStep = (
       });
       const newVisited = new Set<number>([...visited]);
 
-      const toVisit = newVisitingOrder[0];
+      const toVisit = action.payload.animate ? 1 : newVisitingOrder.length;
       let reachedDestination = false;
-      for (const hashVal of toVisit.visitedNodes) {
-         newVisited.add(hashVal);
-         if (hash(state.destination) === hashVal) {
-            reachedDestination = true;
-            break;
+      for (let t = 0; t < toVisit; t++) {
+         if (reachedDestination) break;
+         const currOrder = newVisitingOrder[0];
+         newVisitingOrder.shift();
+         for (const hashVal of currOrder.visitedNodes) {
+            newVisited.add(hashVal);
+            if (hash(state.destination) === hashVal) {
+               reachedDestination = true;
+               break;
+            }
          }
       }
-      newVisitingOrder.shift();
 
       let newState: IAppContext = {
          ...state,
@@ -188,7 +199,6 @@ export const visualizeAlgoStep = (
             visualizingAlgo: false,
             visualizingShortestPath: true,
          };
-
       return newState;
    }
    return state;
@@ -215,7 +225,8 @@ export const setVisualizingShortestPath = (
 
 export const VISUALIZE_SHORTEST_PATH_STEP = "app/visualize_shortest_path_step";
 export type VisualizeShortestPathStep = IAction<
-   typeof VISUALIZE_SHORTEST_PATH_STEP
+   typeof VISUALIZE_SHORTEST_PATH_STEP,
+   { animate: boolean }
 >;
 export const visualizeShortestPathStep = (
    state: IAppContext,
@@ -223,13 +234,14 @@ export const visualizeShortestPathStep = (
 ): IAppContext => {
    console.log("visualizing shortest path", { state });
 
-   if (state.visualizingShortestPath) {
+   if (action.payload && state.visualizingShortestPath) {
       const { shortestPath, visitedOnShortestPath } = state;
       if (shortestPath.length === 0) {
          // done
          return {
             ...state,
             visualizingShortestPath: false,
+            visualizeStepDuration: 0,
          };
       }
 
@@ -238,9 +250,11 @@ export const visualizeShortestPathStep = (
          ...visitedOnShortestPath,
       ]);
 
-      const toVisit = newShortestPath[0];
-      newShortestPath.shift();
-      newVisitedOnShortestPath.add(toVisit);
+      const toVisit = action.payload.animate ? 1 : newShortestPath.length;
+      for (let i = 0; i < toVisit; i++) {
+         newVisitedOnShortestPath.add(newShortestPath[0]);
+         newShortestPath.shift();
+      }
 
       let newState: IAppContext = {
          ...state,

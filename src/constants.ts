@@ -5,6 +5,13 @@ export const HEIGHT = 30;
 export const WIDTH = 30;
 export const INFINITY = 1000000000;
 
+export const visualizeStepDurations = {
+   INSTANT: 0,
+   FAST: 20,
+   MEDIUM: 70,
+   SLOW: 150,
+};
+
 export const dr = [1, -1, 0, 0],
    dc = [0, 0, 1, -1];
 
@@ -40,6 +47,7 @@ export const EMPTY_GRID_CONTEXT: IAppContext = {
    shortestPath: [],
    visitedOnShortestPath: new Set<number>(),
    visited: new Set<number>(),
+   visualizeStepDuration: 0,
    visualizingAlgo: false,
    visualizingShortestPath: false,
    algorithmConfig: {
