@@ -11,6 +11,7 @@ import { IAppContextActions, reducer } from "../context/reducer";
 import { AlgorithmVisualizer } from "./AlgorithmVisualizer";
 import { Grid } from "./Grid";
 import { ShortestPathVisualizer } from "./ShortestPathVisualizer";
+import "./App.css";
 
 const Container = styled.div`
    text-align: center;

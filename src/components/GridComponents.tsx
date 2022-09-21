@@ -9,7 +9,7 @@ export const Container = styled.div`
    justify-content: center;
    align-content: center;
    & > div:last-child {
-      border-bottom: 1px solid #1972d1;
+      border-bottom: 1px solid var(--border-color);
    }
 `;
 
@@ -22,7 +22,7 @@ export interface ICellProps extends IDimension {
 export const GridRow = styled.div.attrs((props: IDimension) => props)`
    width: ${(props) => convertToPixels(props.width)};
    height: ${(props) => convertToPixels(props.height)};
-   border-right: 1px solid #1972d1;
+   border-right: 1px solid var(--border-color);
 
    display: flex;
 `;
@@ -32,12 +32,12 @@ export const Cell = styled.div.attrs((props: ICellProps) => props)`
    height: ${(props) => convertToPixels(props.height)};
    background-color: ${(props) =>
       props.cellOnPath
-         ? "#53ea38"
+         ? `var(--path-cell-color)`
          : props.visited
-         ? "#00a9f7"
+         ? `var(--visited-cell-color)`
          : getBackgroundColor(props.cellType)};
-   border-top: 1px solid #1972d1;
-   border-left: 1px solid #1972d1;
+   border-top: 1px solid var(--border-color);
+   border-left: 1px solid var(--border-color);
 
    display: grid;
    justify-content: center;

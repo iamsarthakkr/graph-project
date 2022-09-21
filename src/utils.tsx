@@ -48,11 +48,11 @@ export const getCellFromHash = (hash: number): ICell => {
 export const getBackgroundColor = (cellType: IGridCellType) => {
    switch (cellType) {
       case "SOURCE":
-         return "#8bcfef";
+         return "var(--source-color)";
       case "DESTINATION":
-         return "#8bcfef";
+         return "var(--destination-color)";
       case "WALL":
-         return "#210a00";
+         return "var(--wall-color)";
       default:
          return "white";
    }

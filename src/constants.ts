@@ -1,8 +1,8 @@
 import { IAppContext } from "./context";
 import { IGridCell } from "./types";
 
-export const HEIGHT = 25;
-export const WIDTH = 25;
+export const HEIGHT = 30;
+export const WIDTH = 30;
 export const INFINITY = 1000000000;
 
 export const dr = [1, -1, 0, 0],

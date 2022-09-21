@@ -1,0 +1,9 @@
+:root {
+   --source-color: #8bcfef;
+   --destination-color: #8bcfef;
+   --wall-color: #210a00;
+
+   --border-color: #b2d6fc;
+   --path-cell-color: #efd358;
+   --visited-cell-color: #7ab9fc;
+}
